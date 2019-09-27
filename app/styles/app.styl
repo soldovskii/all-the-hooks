@@ -1,0 +1,54 @@
+defineFont('IBMPlexMono', 'IBMPlexMono', 400, 'normal')
+defineFont('IBMPlexMono-Bold', 'IBMPlexMono-Bold', 700, 'normal')
+defineFont('IBMPlexMono-Medium', 'IBMPlexMono-Medium', 500, 'normal')
+defineFont('IBMPlexMono-SemiBold', 'IBMPlexMono-SemiBold', 600, 'normal')
+
+*, *:before, *:after
+  box-sizing border-box
+
+//  font-weight normal
+//  font-style normal
+
+html
+  min-height: 100%
+  background-color: $white
+  font-size: $defaultFontSize
+  text-size-adjust 100%
+  vertical-align baseline
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+  +media('notebook')
+    font-size $defaultFontSize * 0.9
+
+  +media('wideDesktop')
+    font-size $defaultFontSize * 1.1
+
+body
+  background-color $white
+  font-family $bodyFont
+  font-size x(14)
+  line-height x(20)
+  margin: 0
+
+html, body
+  display flex
+  flex-grow 1
+  height 100%
+
+:global(#app)
+  position relative
+  display: flex
+  flex-grow 1
+  flex-shrink 0
+  flex-direction column
+  justify-content flex-start
+  width 100%
+
+:global(.preload) *
+  transition: none !important
+
+:global(.disable-hover)
+  pointer-events: none
+
+applyMediaCache()

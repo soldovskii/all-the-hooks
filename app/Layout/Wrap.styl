@@ -1,0 +1,125 @@
+:global {
+  .__react_component_tooltip {
+    display: inline-block;
+    font-size: 13px;
+    left: -999em;
+    opacity: 0;
+    position: fixed;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    top: -999em;
+    z-index: 999
+    visibility: hidden;
+  }
+  .__react_component_tooltip.big {
+    box-shadow: 0 1px 1px 0 rgba(57,101,113,0.05), 0 0 10px 0 rgba(57,101,113,0.20);
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 430px;
+  }
+  .__react_component_tooltip.small {
+    padding: 2px 5px;
+    border: 0 solid #E5E5E5;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.10);
+  }
+
+  .__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {
+    pointer-events: auto
+  }
+
+  .__react_component_tooltip.show {
+    margin-top: 0px;
+    margin-left: 0px;
+    visibility: visible
+  }
+  .__react_component_tooltip.big.show {
+    opacity: 1;
+  }
+  .__react_component_tooltip.small.show {
+    opacity: 0.8;
+  }
+
+
+  .__react_component_tooltip.type-dark {
+    color: #fff;
+    background-color: #222
+  }
+
+  .__react_component_tooltip.type-dark.border {
+    border: 1px solid #fff
+  }
+
+
+  .__react_component_tooltip.type-success {
+    color: #fff;
+    background-color: #8DC572
+  }
+
+  .__react_component_tooltip.type-success.border {
+    border: 1px solid #fff
+  }
+
+
+  .__react_component_tooltip.type-warning {
+    color: #fff;
+    background-color: #F0AD4E
+  }
+
+  .__react_component_tooltip.type-warning.border {
+    border: 1px solid #fff
+  }
+
+
+  .__react_component_tooltip.type-error {
+    color: #fff;
+    background-color: #BE6464
+  }
+
+  .__react_component_tooltip.type-error.border {
+    border: 1px solid #fff
+  }
+
+
+  .__react_component_tooltip.type-info {
+    color: #fff;
+    background-color: #337AB7
+  }
+
+  .__react_component_tooltip.type-info.border {
+    border: 1px solid #fff
+  }
+
+
+  .__react_component_tooltip.type-light {
+    color: #222;
+    background-color: #fff
+  }
+
+  .__react_component_tooltip.type-light.border {
+    border: 1px solid #222
+  }
+
+
+  .__react_component_tooltip.place-top {
+    margin-top: -10px
+  }
+
+  .__react_component_tooltip.place-bottom {
+    margin-top: 10px
+  }
+
+  .__react_component_tooltip.place-left {
+    margin-left: -10px
+  }
+
+  .__react_component_tooltip.place-right {
+    margin-left: 10px
+  }
+
+
+  .__react_component_tooltip .multi-line {
+    display: block;
+    padding: 2px 0px;
+    text-align: center
+  }
+}

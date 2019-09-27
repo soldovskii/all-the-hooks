@@ -1,0 +1,13 @@
+.idea
+.DS_Store
+
+*.logs
+*.log
+
+/.idea
+/node_modules
+/build
+/build-cache
+
+package-lock.json
+yarn-error.log

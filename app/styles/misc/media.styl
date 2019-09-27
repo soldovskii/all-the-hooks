@@ -1,0 +1,72 @@
+$mediaCache = {}
+
+$mediaAliases = {
+  'phonePortrait':      media1x('(max-width: 414px)')
+  'phonePortrait@2x':   media2x('(max-width: 414px)')
+  'phonePortrait@3x':   media3x('(max-width: 414px)')
+
+  'phoneLandscape':     media1x('(max-width: 736px)')
+  'phoneLandscape@2x':  media2x('(max-width: 736px)')
+  'phoneLandscape@3x':  media3x('(max-width: 736px)')
+
+  'phone':         media1x('(max-width: 736px)')
+  'phone@2x':      media2x('(max-width: 736px)')
+  'phone@3x':      media3x('(max-width: 736px)')
+
+  'tablet':        media1x('(min-width: 737px) and (max-width: 1023px)')
+  'tablet@2x':     media2x('(min-width: 737px) and (max-width: 1023px)')
+  'tablet@3x':     media3x('(min-width: 737px) and (max-width: 1023px)')
+
+  'notebook':        media1x('(min-width: 1024px) and (max-width: 1680px)')
+  'notebook@2x':     media2x('(min-width: 1024px) and (max-width: 1680px)')
+  'notebook@3x':     media3x('(min-width: 1024px) and (max-width: 1680px)')
+
+  'desktop':          media1x('(min-width: 1681px) and (max-width: 1920px)')
+  'desktop@2x':       media2x('(min-width: 1681px) and (max-width: 1920px)')
+  'desktop@3x':       media3x('(min-width: 1681px) and (max-width: 1920px)')
+
+  'wideDesktop':          media1x('(min-width: 1921px)')
+  'wideDesktop@2x':       media2x('(min-width: 1921px)')
+  'wideDesktop@3x':       media3x('(min-width: 1921px)')
+}
+
+media1x(query)
+  return 'only screen and ' + query
+
+media2x(query)
+  q = 'only screen and (-webkit-min-device-pixel-ratio: 1.5)          and ' + query + ','
+  q = q + 'only screen and (   min--moz-device-pixel-ratio: 1.5)      and ' + query + ','
+  q = q + 'only screen and (     -o-min-device-pixel-ratio: 1.5/1)    and ' + query + ','
+  q = q + 'only screen and (        min-device-pixel-ratio: 1.5)      and ' + query + ','
+  q = q + 'only screen and (                min-resolution: 192dpi)   and ' + query + ','
+  q = q + 'only screen and (                min-resolution: 2dppx)    and ' + query
+  return q
+
+media3x(query)
+  q = 'only screen and (-webkit-min-device-pixel-ratio: 3)          and ' + query + ','
+  q = q + 'only screen and (   min--moz-device-pixel-ratio: 3)      and ' + query + ','
+  q = q + 'only screen and (     -o-min-device-pixel-ratio: 3/1)    and ' + query + ','
+  q = q + 'only screen and (        min-device-pixel-ratio: 3)      and ' + query + ','
+  q = q + 'only screen and (                min-resolution: 220dpi) and ' + query + ','
+  q = q + 'only screen and (                min-resolution: 3dppx)  and ' + query
+  return q
+
+media($condition)
+  helper($condition)
+    unless ($mediaCache[$condition])
+      $mediaCache[$condition] = ()
+
+    push($mediaCache[$condition], block)
+
+  +helper($condition)
+    {selector() + ''}
+      {block}
+
+// Function we would use to call all the cached styles
+applyMediaCache()
+  for $media, $blocks in $mediaCache
+    $media = unquote($mediaAliases[$media] || $media)
+
+    @media $media
+      for $block in $blocks
+        {$block}

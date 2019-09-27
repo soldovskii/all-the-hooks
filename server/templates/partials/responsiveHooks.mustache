@@ -1,0 +1,11 @@
+{{! Viewport availiable only for mobile devies, not tablets }}
+
+{{#isMobile}}
+    {{#isTablet}}
+        data-layout="tablet"
+    {{/isTablet}}
+
+    {{^isTablet}}
+        data-layout="mobile"
+    {{/isTablet}}
+{{/isMobile}}
