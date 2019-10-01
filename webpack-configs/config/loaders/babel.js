@@ -9,12 +9,3 @@ export const server = (config = {}) => {
     use: ["babel-loader"],
   }
 }
-
-export const browser = (config = {}) => {
-  const { production } = config
-
-  return {
-    ...shared,
-    use: ["babel-loader"],
-  }
-}
