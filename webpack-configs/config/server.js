@@ -1,20 +1,15 @@
 import path from "path"
+import webpack from "webpack"
 
-import { server as serverEntry } from "./utils/entry"
-import { server as serverResolve } from "./utils/resolve"
-import { server as serverOutput } from "./utils/output"
 import { server as serverExternals } from "./utils/externals"
 
-import { server as serverBabelLoader } from "./loaders/babel"
-
-import { moduleConcatenation, namedModules } from "./plugins/webpack"
+export const moduleConcatenation = () => new webpack.optimize.ModuleConcatenationPlugin()
+export const namedModules = () => new webpack.NamedModulesPlugin()
 
 const config = {
   __DIR: path.resolve("./"),
 }
 
-
-// process.traceDeprecation = true
 
 export function serverConfig(options) {
   const { production = false } = options
@@ -24,19 +19,29 @@ export function serverConfig(options) {
     target: "node",
     mode: production ? "production" : "development",
     context: config.__DIR,
-    entry: serverEntry(props),
-    resolve: serverResolve(props),
-    output: serverOutput(props),
-    externals: serverExternals(),
+    entry: {
+      server: "./server/production.js",
+    },
+    output: {
+      path: path.join(config.__DIR, "build"),
+      filename: "[name].js",
+      library: "server",
+      libraryTarget: "commonjs2",
+    },
     module: {
       rules: [
-        serverBabelLoader(props),
+        {
+          test: /\.js|jsx$/,
+          exclude: /node_modules/,
+          use: ["babel-loader"],
+        }
       ],
     },
     plugins: [
       moduleConcatenation(props),
       namedModules(props),
-    ].filter(Boolean),
+    ],
+    externals: serverExternals(),
     optimization: {
       minimize: false
     }
