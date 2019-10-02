@@ -32,7 +32,7 @@ export default async function create(initialState, cookies) {
 
   const middleware = applyMiddleware(thunk)
 
-  const enhances = GLOBALS.PRESET_ENV === "development"
+  const enhances = GLOBALS.ENV_PRESET === "development"
     ? compose(middleware, devToolsExtension())
     : compose(middleware)
 

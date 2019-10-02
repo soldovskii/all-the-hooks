@@ -13,7 +13,7 @@ import { browser as browserBabelLoader } from "./loaders/babel"
 import { browser as browserCssLoader } from "./loaders/css"
 
 // plugins
-import globals from "./plugins/globals"
+import globals from "./plugins/define"
 import extractCss from "./plugins/extractCss"
 import statsPlugin from "./plugins/stats"
 import progress from "./plugins/progress"

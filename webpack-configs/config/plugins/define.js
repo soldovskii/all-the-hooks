@@ -9,7 +9,7 @@ function getEnvName(name) {
   return snakeCase(name).toUpperCase()
 }
 
-function getEnvValue(name, defaultValue) {
+function getEnvValue(name, defaultValue = null) {
   const envValue = process.env[name]
 
   return typeof envValue === "undefined" ? defaultValue : envValue
@@ -74,6 +74,10 @@ const extractNodeEnv = () => {
   return JSON.stringify(process.env.NODE_ENV || "development")
 }
 
+const extractPORT = () => {
+  return JSON.stringify(process.env.PORT || null)
+}
+
 const extractGitCommit = () => {
   try {
     return git.long()
@@ -85,12 +89,9 @@ const extractGitCommit = () => {
 const globalsTemplate = {
   GIT_COMMIT: extractGitCommit(),
   BACKEND_URL: null,
-  BASE_URL: null,
-  PORT: null,
   USE_HTTP_AUTH: false,
-  USE_HTTP_SSL: null,
-  PRESET_ENV: "development",
-  NODE_ENV: null,
+  USE_HTTP_SSL: false,
+  ENV_PRESET: "development",
 }
 
 export default (config = {}) => {
@@ -100,7 +101,7 @@ export default (config = {}) => {
     __dirname: JSON.stringify(DIR),
     __filename: JSON.stringify(path.join(DIR, "index.js")),
     "process.env.NODE_ENV": extractNodeEnv(),
-    "NODE_ENV": extractNodeEnv(),
+    "process.env.PORT": extractPORT(),
     GLOBALS: composeGlobals(globalsTemplate),
   }
 

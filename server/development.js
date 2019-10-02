@@ -10,7 +10,7 @@ import {
   webpackHotMiddleware,
 } from "./utils/webpackMiddlewares"
 
-import PORT from "./utils/PORT"
+import getPort from "./utils/getPort"
 import startMessage from "./utils/startMessage"
 import prerenderDevelopment from "server/prerender/development"
 
@@ -27,4 +27,4 @@ app.use(cookies.express())
 
 app.use("/", (req, res) => prerenderDevelopment(req, res))
 
-app.listen(PORT, startMessage("development", PORT))
+app.listen(getPort(), startMessage(getPort()))

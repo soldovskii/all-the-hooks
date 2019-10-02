@@ -12,7 +12,7 @@ import {
   httpsMiddleware,
 } from "./utils/sharedMiddlewares"
 
-import PORT from "./utils/PORT"
+import getPort from "./utils/getPort"
 import startMessage from "./utils/startMessage"
 import prerenderProduction from "server/prerender/production"
 
@@ -38,6 +38,6 @@ app.use("/assets", assetsMiddleware)
 
 app.use("/", (req, res) => prerenderProduction(req, res))
 
-app.listen(PORT, startMessage("production", PORT))
+app.listen(getPort(), startMessage(getPort()))
 
 

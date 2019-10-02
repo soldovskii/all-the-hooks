@@ -14,7 +14,7 @@ import { server as serverBabelLoader } from "./loaders/babel"
 import { server as serverCssLoader } from "./loaders/css"
 
 // plugins
-import globals from "./plugins/globals"
+import globals from "./plugins/define"
 import progress from "./plugins/progress"
 import { moduleConcatenation, namedModules } from "./plugins/webpack"
 
