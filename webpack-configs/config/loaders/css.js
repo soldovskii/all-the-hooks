@@ -4,7 +4,7 @@ import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 
 const stylesLoaders = (options = {}) => {
-  const { DIR, minimize = false, production = false } = options
+  const { __DIR, minimize = false, production = false } = options
 
   return [
     {
@@ -28,7 +28,7 @@ const stylesLoaders = (options = {}) => {
     {
       loader: "stylus-loader",
       options: {
-        import: [path.join(DIR, "app", "styles", "misc", "auto-import.styl")],
+        import: [path.join(__DIR, "app", "styles", "misc", "auto-import.styl")],
         preferPathResolver: "webpack",
         sourceMap: production,
       },
@@ -51,14 +51,22 @@ export const browser = (config = {}) => {
       test: /\.styl$/,
       use: ExtractTextPlugin.extract({
         fallback: "style-loader",
-        use: [...stylesLoaders({ ...config, minimize: true })],
+        use: [
+          ...stylesLoaders({ ...config, minimize: true }),
+        ],
       }),
     }
   } else {
     return {
       test: /\.styl$/,
       use: [
-        { loader: "style-loader", options: { sourceMap: true } },
+        {
+          loader: "style-loader",
+          options: {
+            sourceMap: true,
+            hmr: false,
+          },
+        },
         ...stylesLoaders(config),
       ],
     }
