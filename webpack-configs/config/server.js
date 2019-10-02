@@ -1,23 +1,19 @@
 import path from "path"
 import webpack from "webpack"
+import nodeExternals from "webpack-node-externals"
 
-import { server as serverExternals } from "./utils/externals"
-
-export const moduleConcatenation = () => new webpack.optimize.ModuleConcatenationPlugin()
-export const namedModules = () => new webpack.NamedModulesPlugin()
+const moduleConcatenation = () => new webpack.optimize.ModuleConcatenationPlugin()
+const namedModules = () => new webpack.NamedModulesPlugin()
+const processEnv = () => new webpack.DefinePlugin({ "process.env": { NODE_ENV: JSON.stringify("production") } })
 
 const config = {
   __DIR: path.resolve("./"),
 }
 
-
-export function serverConfig(options) {
-  const { production = false } = options
-  const props = { ...config, ...options }
-
+export function serverConfig() {
   return {
     target: "node",
-    mode: production ? "production" : "development",
+    mode: "production",
     context: config.__DIR,
     entry: {
       server: "./server/production.js",
@@ -34,16 +30,19 @@ export function serverConfig(options) {
           test: /\.js|jsx$/,
           exclude: /node_modules/,
           use: ["babel-loader"],
-        }
+        },
       ],
     },
     plugins: [
-      moduleConcatenation(props),
-      namedModules(props),
+      moduleConcatenation(),
+      namedModules(),
+      processEnv(),
     ],
-    externals: serverExternals(),
+    externals: [
+      nodeExternals()
+    ],
     optimization: {
-      minimize: false
-    }
+      minimize: false,
+    },
   }
 }

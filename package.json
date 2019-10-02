@@ -10,7 +10,7 @@
   "author": "boris.soldovskij@gmail.com",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "NODE_ENV=production webpack --config webpack-configs/build.babel.js && node ./build/server"
+    "start": "webpack --config webpack-configs/build.babel.js && NODE_ENV=production node ./build/server"
   },
   "dependencies": {
     "express": "4.16.3",
@@ -30,7 +30,8 @@
     "eslint": "6.4.0",
     "eslint-plugin-react": "7.14.3",
     "webpack": "4.12.0",
-    "webpack-cli": "3.3.9"
+    "webpack-cli": "3.3.9",
+    "webpack-node-externals": "^1.7.2"
   },
   "optionalDependencies": {
     "fsevents": "1.2.4"

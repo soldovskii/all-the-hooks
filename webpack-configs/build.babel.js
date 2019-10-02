@@ -1,3 +1,3 @@
 import { serverConfig } from "./config/server"
 
-export default serverConfig({ production: true })
+export default serverConfig()
