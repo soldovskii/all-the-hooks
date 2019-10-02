@@ -2,11 +2,9 @@ import "colors"
 import path from "path"
 
 const validAppEnvs = ["development", "staging", "production"]
-const { ENV_PRESET = "development" } = process.env
+const { PRESET_ENV = "development" } = process.env
 
-console.log(`CURRENT ENV_PRESET is "${ENV_PRESET}"`.green)
-
-if (!validAppEnvs.includes(ENV_PRESET)) {
+if (!validAppEnvs.includes(PRESET_ENV)) {
   console.log(
     "The ENV_PRESET environment variable is invalid.".yellow,
     `One of${JSON.stringify(validAppEnvs)} required`.yellow,
@@ -14,10 +12,10 @@ if (!validAppEnvs.includes(ENV_PRESET)) {
   )
 }
 
-export default function getEnvVariables(__DIR) {
+export default function getEnvVariables(DIR) {
   const dotenvFiles = [
-    path.join(__DIR, `.env.${ENV_PRESET}`),
-    path.join(__DIR, ".env"),
+    path.join(DIR, `.env.${PRESET_ENV}`),
+    path.join(DIR, ".env"),
   ]
 
   dotenvFiles.forEach(dotenvFile => {

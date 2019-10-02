@@ -1,10 +1,10 @@
 import path from "path"
 
 export function server(config = {}) {
-  const { __DIR, production } = config
+  const { DIR, production } = config
 
   return {
-    path: path.join(__DIR, "build"),
+    path: path.join(DIR, "build"),
     filename: "[name].js",
     chunkFilename: "[name].js",
     sourceMapFilename: "[file].map",
@@ -15,11 +15,11 @@ export function server(config = {}) {
 }
 
 export function browser(config) {
-  const { __DIR, production } = config
+  const { DIR, production } = config
 
   if (production) {
     return {
-      path: path.join(__DIR, "build"),
+      path: path.join(DIR, "build"),
       filename: "[name]@[chunkhash:12].js",
       chunkFilename: "[name]@[chunkhash:12].js",
       sourceMapFilename: "[file].map",
@@ -27,7 +27,7 @@ export function browser(config) {
     }
   } else {
     return {
-      path: path.join(__DIR, "build"),
+      path: path.join(DIR, "build"),
       filename: "[name].js",
       chunkFilename: "[name].js",
       publicPath: "/assets/",

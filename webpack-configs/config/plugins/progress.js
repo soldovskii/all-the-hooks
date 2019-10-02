@@ -1,11 +1,8 @@
-import ProgressBarPlugin from "progress-bar-webpack-plugin"
-import "colors"
+import WebpackBar from "webpackbar"
+
 
 export default (config = {}) => {
-  const {entry} = config
+  const { entry } = config
 
-  return new ProgressBarPlugin({
-    format: `${entry.green} ${"[:bar][:percent]".yellow} ${":elapsed seconds".green}`,
-    clear: false,
-  })
+  return new WebpackBar({ name: entry, profile: true })
 }

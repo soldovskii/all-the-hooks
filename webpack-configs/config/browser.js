@@ -17,16 +17,15 @@ import globals from "./plugins/globals"
 import extractCss from "./plugins/extractCss"
 import statsPlugin from "./plugins/stats"
 import progress from "./plugins/progress"
-import visualizer from "./plugins/visualizer"
 import compression from "./plugins/compression"
 import optimization from "./plugins/optimization"
 import { moduleConcatenation, hmr, namedModules } from "./plugins/webpack"
 
 const config = {
-  __DIR: path.resolve("./"),
+  DIR: path.resolve("./"),
 }
 
-dotenv(config.__DIR)
+dotenv(config.DIR)
 
 // process.traceDeprecation = true
 
@@ -36,7 +35,7 @@ export function browserConfig(options) {
 
   return {
     mode: production ? "production" : "development",
-    context: config.__DIR,
+    context: config.DIR,
     entry: browserEntry(props),
     resolve: browserResolve(props),
     output: browserOutput(props),
@@ -57,7 +56,6 @@ export function browserConfig(options) {
       namedModules(props),
       statsPlugin(props),
       progress({ entry: "browser" }),
-      visualizer({ entry: "browser" }),
       production ? null : hmr(),
       production ? extractCss(props) : null,
       production ? compression(props) : null,

@@ -14,10 +14,11 @@
     "build-prod-server": "NODE_ENV=production webpack --config webpack-configs/server.production.babel.js",
     "build-prod-browser": "NODE_ENV=production webpack --config webpack-configs/browser.production.babel.js",
     "build-prod": "yarn build-prod-server && yarn build-prod-browser",
-    "start": "node ./build/server",
-    "prod": "yarn build-prod && yarn start",
+    "start-prod": "NODE_ENV=production node ./build/server",
+    "prod": "yarn build-prod && yarn start-prod",
     "build-dev": "webpack --config webpack-configs/server.development.babel.js",
-    "dev": "yarn build-dev && yarn start",
+    "start-dev": "node ./build/server",
+    "dev": "yarn build-dev && yarn start-dev",
     "heroku-postbuild": "yarn clean && yarn build-prod"
   },
   "dependencies": {
@@ -92,7 +93,6 @@
     "mustache-loader": "1.4.3",
     "postcss-hover": "0.3.0",
     "postcss-loader": "2.1.5",
-    "progress-bar-webpack-plugin": "^1.12.1",
     "stats-webpack-plugin": "0.7.0",
     "style-loader": "0.21.0",
     "stylus": "0.54.5",
@@ -109,7 +109,8 @@
     "webpack-dev-middleware": "3.1.3",
     "webpack-dev-server": "3.1.11",
     "webpack-hot-middleware": "2.22.2",
-    "webpack-visualizer-plugin": "0.1.11"
+    "webpack-node-externals": "^1.7.2",
+    "webpackbar": "^4.0.0"
   },
   "optionalDependencies": {
     "fsevents": "1.2.4"

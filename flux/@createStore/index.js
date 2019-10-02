@@ -32,7 +32,7 @@ export default async function create(initialState, cookies) {
 
   const middleware = applyMiddleware(thunk)
 
-  const enhances = GLOBALS.ENV_PRESET === "development"
+  const enhances = GLOBALS.PRESET_ENV === "development"
     ? compose(middleware, devToolsExtension())
     : compose(middleware)
 
@@ -56,7 +56,7 @@ export default async function create(initialState, cookies) {
   }
 
   if (isClient) {
-    CookiesJS.defaults.secure = GLOBALS.USE_SSL
+    CookiesJS.defaults.secure = GLOBALS.USE_HTTP_SSL
 
     const persistConfig = {
       key: "root",

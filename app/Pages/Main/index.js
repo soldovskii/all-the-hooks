@@ -11,7 +11,7 @@ export default class Wrap extends Component {
 
         <h2>Основные хуки</h2>
         <ul>
-          <li>seState</li>
+          <li>useState</li>
           <li>useEffect</li>
           <li>useContext</li>
         </ul>

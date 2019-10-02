@@ -12,13 +12,13 @@ const shared = {
 }
 
 export const browser = (config = {}) => {
-  const { __DIR, production } = config
+  const { DIR, production } = config
 
   const alias = {
-    "app": path.join(__DIR, "app"),
-    "client": path.join(__DIR, "client"),
-    "flux": path.join(__DIR, "flux"),
-    "helpers": path.join(__DIR, "helpers"),
+    "app": path.join(DIR, "app"),
+    "client": path.join(DIR, "client"),
+    "flux": path.join(DIR, "flux"),
+    "helpers": path.join(DIR, "helpers"),
   }
 
   if (!production) {
@@ -27,30 +27,26 @@ export const browser = (config = {}) => {
 
   return {
     ...shared,
-    modules: [__DIR, "node_modules"],
+    modules: [DIR, "node_modules"],
     alias,
   }
 }
 
 export const server = (config = {}) => {
-  const { __DIR, production } = config
+  const { DIR, production } = config
 
   const alias = {
-    "app": path.join(__DIR, "app"),
-    "client": path.join(__DIR, "client"),
-    "flux": path.join(__DIR, "flux"),
-    "helpers": path.join(__DIR, "helpers"),
-    "build": path.join(__DIR, "build"),
-    "server": path.join(__DIR, "server"),
-  }
-
-  if (production) {
-    alias["react-dom"] = path.join(__DIR, "proj_modules/react-dom")
+    "app": path.join(DIR, "app"),
+    "client": path.join(DIR, "client"),
+    "flux": path.join(DIR, "flux"),
+    "helpers": path.join(DIR, "helpers"),
+    "build": path.join(DIR, "build"),
+    "server": path.join(DIR, "server"),
   }
 
   return {
     ...shared,
-    modules: [__DIR, "node_modules"],
+    modules: [DIR, "node_modules"],
     alias,
   }
 }

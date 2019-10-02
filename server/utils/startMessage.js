@@ -1,28 +1,26 @@
 import "colors"
+import padEnd from "lodash/padEnd"
 
-const formatMessage = (type, port, globals) =>
-  `
-=============================================
-App ${type} server listening on ${port} with:
+const formatMessage = (port, globals) => `
+App listening on http://localhost:${port} with:
+╔${padEnd("", 22, "═")}╦${padEnd("", 44, "═")}╗
 ${globals}
-=============================================
+╚${padEnd("", 22, "═")}╩${padEnd("", 44, "═")}╝
 `.green
 
 export default function startMessage(type, port) {
-  const globals = JSON.stringify(GLOBALS, null, 2)
-  const message = formatMessage(type, port, globals, )
+  const globals = Object.keys(GLOBALS).map(k => `║ ${padEnd(k, 20)} ║ ${padEnd(GLOBALS[k] || "undefined", 42)} ║`).join(" \n")
+  const message = formatMessage(port, globals)
 
   return error => {
     if (error) {
-      errorMessage(error)
+      errorMessage(type, port, error)
     }
 
-    setTimeout(() => {
-      console.log(message)
-    }, 1000)
+    setTimeout(() => console.log(message), 1000)
   }
 }
 
-export const errorMessage = (type = "development", port = 8080) => {
-  console.error(`${type} server failed to start on ${port}`)
+export const errorMessage = (type = "development", port = 8080, error) => {
+  console.error(`${type} server failed to start on ${port}: ${error}`)
 }

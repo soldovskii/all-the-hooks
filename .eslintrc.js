@@ -10,8 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
   ],
   'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly',
+    'GLOBALS': 'readonly',
   },
   'parser': '@typescript-eslint/parser',
   'parserOptions': {

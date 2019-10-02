@@ -16,14 +16,13 @@ import { server as serverCssLoader } from "./loaders/css"
 // plugins
 import globals from "./plugins/globals"
 import progress from "./plugins/progress"
-import visualizer from "./plugins/visualizer"
 import { moduleConcatenation, namedModules } from "./plugins/webpack"
 
 const config = {
-  __DIR: path.resolve("./"),
+  DIR: path.resolve("./"),
 }
 
-dotenv(config.__DIR)
+dotenv(config.DIR)
 
 // process.traceDeprecation = true
 
@@ -34,7 +33,7 @@ export function serverConfig(options) {
   return {
     target: "node",
     mode: production ? "production" : "development",
-    context: config.__DIR,
+    context: config.DIR,
     entry: serverEntry(props),
     resolve: serverResolve(props),
     output: serverOutput(props),
@@ -54,7 +53,6 @@ export function serverConfig(options) {
       moduleConcatenation(props),
       namedModules(props),
       progress({ entry: "server" }),
-      visualizer({ entry: "server" }),
     ].filter(Boolean),
     optimization: {
       minimize: false
