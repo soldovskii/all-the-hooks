@@ -2,7 +2,7 @@
 https://ru.reactjs.org/docs/hooks-reference.html
 
 ###Основные хуки
-- seState
+- useState
 - useEffect
 - useContext
 
